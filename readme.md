@@ -9,7 +9,7 @@ Partial cache made simple!
 
 ## Usage
 
-The only thing you need to use is the `partial::cache` function.
+The only thing you need to use is the `partial::cache($filename, $callback, $expire = null)` function.
 
 - The first argument is the filename. By default it will be renamed to a hashed md5 filename.
 - The second argument is a function callback. Inside it, place the slow code that you want to cache.
