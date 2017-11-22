@@ -11,10 +11,6 @@ Partial cache made simple!
 
 The only thing you need to use is the `partial::cache($filename, $callback, $expire = null)` function.
 
-- The first argument is the filename. By default it will be renamed to a hashed md5 filename.
-- The second argument is a function callback. Inside it, place the slow code that you want to cache.
-- The third argument is optional. It's an expire time that will override the default option.
-
 Everything within the callback function will be cached. When it reaches the expire time, it will run again and recached.
 
 ### Basic
@@ -55,10 +51,10 @@ The cached data goes into `$categories` and `$products` when using it in a templ
 return function($site, $pages, $page) {
     return [
         'categories' => partial::cache('categories.json', function() {
-            return SlowCategoryFunction();
+            return slowCategoryFunction();
         }),
         'products' => partial::cache('products.json', function() {
-            return SlowProductFunction();
+            return slowProductFunction();
         }),
     ];
 };
