@@ -47,7 +47,9 @@ echo partial::cache('filename.json', function() {
 
 ### With a controller
 
-Here is an example controller. The cached data goes into `$categories` and `$products` when calling it in a template or a snippet.
+The cached data goes into `$categories` and `$products` when using it in a template or a snippet.
+
+**Controller**
 
 ```php
 return function($site, $pages, $page) {
