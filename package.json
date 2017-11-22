@@ -1,0 +1,8 @@
+{
+  "name": "kirby-partial-cache",
+  "description": "Partial cache made simple!",
+  "author": "Jens Törnell <jens.tornell@gmail.com>",
+  "version": "0.1",
+  "type": "kirby-plugin",
+  "license": "Free at the moment"
+}
