@@ -22,7 +22,7 @@ Everything within the callback function will be cached. When it reaches the expi
 Use it in a template or a snippet.
 
 ```php
-echo partial::cache('filename.txt', function() {
+echo partial::cache('filename.json', function() {
     return 'Hello world!';
 });
 ```
@@ -30,7 +30,7 @@ echo partial::cache('filename.txt', function() {
 ### Use arguments
 
 ```php
-echo partial::cache('filename.txt', function() use ($page, $site) {
+echo partial::cache('filename.json', function() use ($page, $site) {
     return $page->title() . ' - ' . $site->title();
 });
 ```
@@ -40,7 +40,7 @@ echo partial::cache('filename.txt', function() use ($page, $site) {
 The third argument is the cache expire time, which is optional. In this case the cache will refresh after 1 minute (60 seconds).
 
 ```php
-echo partial::cache('filename.txt', function() {
+echo partial::cache('filename.json', function() {
     return $page->title();
 }, 60);
 ```
