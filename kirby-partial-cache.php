@@ -3,19 +3,12 @@ class PartialCache {
     public function get($filename, $callback, $expires) {
         $this->filename = $filename;
         $this->callback = $callback;
-        $this->timeout = ($expires) ? $expires : c::get('partial.cache.expires', 30000);
+        $this->timeout = ($expires) ? $expires : c::get('partial.cache.expires', 84400);
         $this->comments = c::get('partial.cache.comments', false);
-        $this->hash = c::get('partial.cache.filename.hash', false);
+        $this->hash = c::get('partial.cache.filename.hash', true);
         $this->filepath = $this->filepath();
 
         echo $this->timeout;
-
-        // Docs
-        // Docs hur use används för $page
-        // Docs cache root
-        // Docs comments, before after
-        // Docs expires som argument
-        // DOCS md5 option true eller false
 
         if($this->expired()) {
             return $this->write();
@@ -31,7 +24,7 @@ class PartialCache {
     }
 
     private function filepath() {
-        $root = (kirby()->roots()->partial()) ? kirby()->roots()->partial() : kirby()->roots()->cache();
+        $root = (kirby()->roots()->partial()) ? kirby()->roots()->partial() : kirby()->roots()->site() . DS . 'cache-partial';
         $filename = $this->filename;
 
         if($this->hash) {
@@ -65,7 +58,7 @@ class PartialCache {
 
     private function after() {
         $text = "\n<!-- Partial Cache ends -->\n\n";
-        return c::get('partial.cache.before', $text);
+        return c::get('partial.cache.after', $text);
     }
 }
 
