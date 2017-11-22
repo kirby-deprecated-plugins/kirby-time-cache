@@ -19,6 +19,8 @@ Everything within the callback function will be cached. When it reaches the expi
 
 ### Basic
 
+Use it in a template or a snippet.
+
 ```php
 echo partial::cache('filename.txt', function() {
     return 'Hello world!';
@@ -41,6 +43,23 @@ The third argument is the cache expire time, which is optional. In this case the
 echo partial::cache('filename.txt', function() {
     return $page->title();
 }, 60);
+```
+
+### With a controller
+
+Here is an example controller. The cached data goes into `$categories` and `$products` when calling it in a template or a snippet.
+
+```php
+return function($site, $pages, $page) {
+    return [
+        'categories' => partial::cache('categories.json', function() {
+            return SlowCategoryFunction();
+        }),
+        'products' => partial::cache('products.json', function() {
+            return SlowProductFunction();
+        }),
+    ];
+};
 ```
 
 ## Requirements
