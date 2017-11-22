@@ -4,6 +4,17 @@
 
 Partial cache made simple!
 
+**Features**
+
+- Cache anything you want.
+- Set the expire time as config option or as argument.
+- Set the cache folder to anything you like.
+- Hash the cache filename or not, the choice is yours.
+- Debug the cached blocks by using a HTML comment before and after.
+- Multiple instances. Multiple cache files, for multiple blocks, with different expire times.
+
+## Table of contents
+
 - [Installation instructions](docs/install.md)
 - [Options](docs/options.md)
 
