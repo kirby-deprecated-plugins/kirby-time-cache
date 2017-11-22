@@ -8,8 +8,6 @@ class PartialCache {
         $this->hash = c::get('partial.cache.filename.hash', true);
         $this->filepath = $this->filepath();
 
-        echo $this->timeout;
-
         if($this->expired()) {
             return $this->write();
         } else {
