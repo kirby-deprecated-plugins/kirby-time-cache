@@ -1,8 +1,8 @@
 {
-  "name": "kirby-partial-cache",
-  "description": "Partial cache made simple!",
+  "name": "kirby-time-cache",
+  "description": "A cache that expires after a time of your choice",
   "author": "Jens Törnell <jens.tornell@gmail.com>",
-  "version": "0.1",
+  "version": "0.2",
   "type": "kirby-plugin",
-  "license": "Free at the moment"
+  "license": "MIT"
 }

@@ -3,44 +3,38 @@
 The following options can be set in your `/site/config/config.php` file:
 
 ```php
-c::set('partial.cache.expires', 86400);
-c::set('partial.cache.filename.hash', true)
-c::set('partial.cache.comments', false)
-c::set('partial.cache.before');
-c::set('partial.cache.after');
+c::set('time.cache.expires', 86400);
+c::set('time.cache.filename.hash', true);
+c::set('time.cache.pages', false);
+c::set('time.cache.pages.comments', false);
+c::set('time.cache.pages.expires', 86400);
+c::set('time.cache.path', kirby()->roots()->site() . '/cache-time');
 ```
 
-### partial.cache.expires
+### time.cache.expires
 
 By default the expire time is set to `86400` seconds, which is 1 day.
 
-### partial.cache.filename.hash
+### time.cache.filename.hash
 
 If you want to keep the cache filenames without hashing them, you need to set this value to `false`.
 
-### partial.cache.comments
+### time.cache.pages
 
-By having this value set to `true`, you will have HTML comments around your cached code block.
+If you want to cache the full pages similar to the built in cache, you can set this to `true`.
 
-### partial.cache.before
+### time.cache.pages.comments
 
-This option is dependent on that `partial.cache.comments` is set to `true`.
+This option is only relevant if `time.cache.pages` is `true`.
 
-By changing this option you can output whatever you want before the cached block in the HTML source code. By default you will see the expire time and the filename.
+If you want to see information about the cache pages, like `id`, `filename` and `timestamp` as a HTML comment you can set this to `true`. Be aware that the HTML comment is cached as well. If you change this option after the page is cached, you need to clear the cache and reload the page.
 
-### partial.cache.after
+### time.cache.pages.expires
 
-This option is dependent on that `partial.cache.comments` is set to `true`.
+This option is only relevant if `time.cache.pages` is `true`.
 
-By changing this option you can output whatever you want after the cached block in the HTML source code. By default you will see that the cached code block has ended.
+By default the pages cache will expire after 1 day. You can change it by setting an expire time in seconds.
 
-## Site options
+### time.cache.path
 
-If you don't already have a `site.php` in the root folder of your installation, add one. Now you can change the folder of where to store your partial cache files. By default `site/cache-partial` is used.
-
-**Be aware:** If you set it to `kirby()->roots()->cache()`, the partial cache might not work as expected.
-
-```php
-$kirby = kirby();
-$kirby->roots()->partial() = $kirby->roots()->site() . DS . 'cache-partial';
-```
+The path of where the cache files will be stored. By default `site/cache-time` is used.

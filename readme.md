@@ -1,17 +1,14 @@
-# Kirby Partial Cache
+# Kirby Time Cache
 
-*Version 0.1*
+![Version](https://img.shields.io/badge/version-0.2-blue.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg) [![Donate](https://img.shields.io/badge/give-donation-yellow.svg)](https://www.paypal.me/DevoneraAB)
 
-Partial cache made simple!
+A cache that expires after a time of your choice.
 
 **Features**
 
-- Cache anything you want.
-- Set the expire time as config option or as argument.
-- Set the cache folder to anything you like.
-- Hash the cache filename or not, the choice is yours.
-- Debug the cached blocks by using a HTML comment before and after.
-- Multiple instances. Multiple cache files, for multiple blocks, with different expire times.
+- Cache part of a page or a function.
+- Cache pages similar to the built in cache.
+- Set an expire time, as config option or as argument.
 
 ## Table of contents
 
@@ -20,56 +17,52 @@ Partial cache made simple!
 
 ## Usage
 
-The only thing you need to use is the `partial::cache($filename, $callback, $expire = null)` function.
+### Cache pages
 
-Everything within the callback function will be cached. When it reaches the expire time, it will run again and recached.
+This cache will cache pages similar to the built in cache. The difference is that it will expire after a time of your choice. It's expecially good for sites that use a database where Kirby does not know when the content has been updated.
 
-### Basic
-
-Use it in a template or a snippet.
+You need to add this to your config:
 
 ```php
-echo partial::cache('filename.json', function() {
+c::set('time.cache.pages', true);
+```
+
+To see `id`, `filename` and `timestamp` in the cached HTML code, you can also add this option:
+
+```php
+c::set('time.cache.pages.comments', true);
+```
+
+*You can't add the last option after the page has already been cached. Then you need to remove the cache file or wait for the cache to expire and refresh itself*
+
+### Cache part - Basic
+
+Use it in a template or a snippet like this:
+
+```php
+echo time::cache('filename.json', function() {
     return 'Hello world!';
 });
 ```
 
-### Use arguments
+### Cache part - Advanced
 
 ```php
-echo partial::cache('filename.json', function() use ($page, $site) {
+$page = page('about');
+$site = site();
+
+echo time::cache('filename.json', function() use ($page, $site) {
     return $page->title() . ' - ' . $site->title();
-});
-```
-
-### Use a custom expire time
-
-The third argument is the cache expire time, which is optional. In this case the cache will refresh after 1 minute (60 seconds).
-
-```php
-echo partial::cache('filename.json', function() {
-    return $page->title();
 }, 60);
 ```
 
-### With a controller
+**Use arguments**
 
-The cached data goes into `$categories` and `$products` when using it in a template or a snippet.
+It uses `$page` and `$site` that then become available inside the `time::cache` function. You can use any variables you want.
 
-**Controller**
+**Time expire**
 
-```php
-return function($site, $pages, $page) {
-    return [
-        'categories' => partial::cache('categories.json', function() {
-            return slowCategoryFunction();
-        }),
-        'products' => partial::cache('products.json', function() {
-            return slowProductFunction();
-        }),
-    ];
-};
-```
+It also has the third argument `60` which is the expire time. It will refresh the cache in 1 minute (60 seconds). You can also set the expire time globally with the `c::set('time.cache.expires')` [option](docs/options.md).
 
 ## Requirements
 
@@ -77,11 +70,13 @@ return function($site, $pages, $page) {
 
 ## Disclaimer
 
-This plugin is provided "as is" with no guarantee. Use it at your own risk and always test it yourself before using it in a production environment. If you find any issues, please [create a new issue](https://github.com/jenstornell/kirby-partial-cache/issues/new).
+This plugin is provided "as is" with no guarantee. Use it at your own risk and always test it yourself before using it in a production environment. If you find any issues, please [create a new issue](https://github.com/jenstornell/kirby-time-cache/issues/new).
 
 ## License
 
-Free to use at the moment.
+[MIT](https://opensource.org/licenses/MIT)
+
+It is discouraged to use this plugin in any project that promotes racism, sexism, homophobia, animal abuse, violence or any other form of hate speech.
 
 ## Credits
 
