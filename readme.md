@@ -14,6 +14,7 @@ A cache that expires after a time of your choice.
 
 - [Installation instructions](docs/install.md)
 - [Options](docs/options.md)
+- [Changelog](docs/changelog.md)
 
 ## Usage
 
