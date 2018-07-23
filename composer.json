@@ -1,0 +1,19 @@
+{
+    "name": "jenstornell/kirby-time-cache",
+    "type": "plugin",
+    "version": "0.3.0",
+    "autoload": {
+        "files": [
+            "config.php"
+        ],
+        "psr-4": {
+            "JensTornell\\": "classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jens Törnell",
+            "email": "jens.tornell@gmail.com"
+        }
+    ]
+}
