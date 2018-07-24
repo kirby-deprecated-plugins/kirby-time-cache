@@ -17,7 +17,6 @@ class Time {
     }
 
     public static function flush() {
-        // flush => https://getkirby.com/docs/toolkit/api/dir/remove
-        \Dir::remove(option('jenstornell.time-cache.path'), true); 
+        static::instance()->flush();
     }
 }
