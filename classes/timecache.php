@@ -12,9 +12,8 @@ class TimeCache {
     public function get($filename, $callback, $expires) {
         $cache = kirby()->cache('jenstornell.time-cache');
         $timeout = ($expires) ? $expires : option('jenstornell.time-cache.expires');
-        $filepath = $this->filepath($filename);
 
-        $response = $cache->get($this->filename);
+        $response = $cache->get($filename);
         if(!$response) {
             $response = self::data($callback);
             $cache->set(
@@ -32,7 +31,7 @@ class TimeCache {
 
     private function data($callback) {
         if(is_callable($callback)) {
-            return call_user_func_array($callback);
+            return call_user_func_array($callback, []);
         }
     }
     
